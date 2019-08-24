@@ -2,7 +2,7 @@ import React from "react"
 import gql from "graphql-tag"
 import moment from "moment"
 import { useQuery } from "@apollo/react-hooks"
-import { Text, View, ScrollView, TouchableOpacity } from "react-native"
+import { Text, View, ScrollView } from "react-native"
 
 const ALL_FILMS_QUERY = gql`
   query{
@@ -31,7 +31,7 @@ export default function HomeScreen(props) {
         borderWidth: 2,
         borderColor: "#c3cfd9" 
       }}>
-        <Text style={{ color: "#6558f5", fontSize: 30 }}>Bienvenido a Xavy Wars!</Text>
+        <Text style={{ color: "#6558f5", fontSize: 30 }}> a Xavy Wars!</Text>
       </View>
 
       <View style={{ 
@@ -83,11 +83,7 @@ export default function HomeScreen(props) {
                     </View>
                   ))}
                 </View>
-								<TouchableOpacity onPress={() => props.navigation.navigate('Detail', {
-									id: 1	
-								})}>
-	                <Text style={{ color: "#67c9bf", fontSize: 15, right: 0, position: "absolute", bottom: 0 }}>Ver más ></Text>
-								</TouchableOpacity>
+                <Text style={{ color: "#67c9bf", fontSize: 15, right: 0, position: "absolute", bottom: 0 }}>Ver más ></Text>
               </View>
           ))}
         </ScrollView>
