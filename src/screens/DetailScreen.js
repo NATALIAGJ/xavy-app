@@ -1,91 +1,87 @@
 import React from "react"
 import gql from "graphql-tag"
-import moment from "moment"
 import { useQuery } from "@apollo/react-hooks"
+import moment from "moment"
 import { Text, View, ScrollView } from "react-native"
+import { Header } from "../components/index"
+import style from "../styles/UiStyle"
+import styleHome from "../styles/HomeScreenStyle"
 
-const ALL_FILMS_QUERY = gql`
-  query{
-    allFilms{
+const FILM_QUERY = gql`
+  query getFilm($id: ID!) {
+    Film(id: $id) {
       id
       title
-      createdAt
+      releaseDate
       director
-      producers
+      species {
+        name
+        classification
+        language
+        designation
+        hairColor
+        eyeColor
+        averageHeight
+        averageLifespan
+      }
     }
   }
 `
 
 export default function HomeScreen(props) {
-  const { loading, error, data } = useQuery(ALL_FILMS_QUERY)
+  const { id } = props.navigation.state.params
+  const { loading, error, data } = useQuery(FILM_QUERY, {
+    variables: { id }
+  })
+  const film = data.Film
   if (loading) return <Text>Loading...</Text>
   if (error) return <Text>Error!!</Text>
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <View style={{ 
-        flex: 0,
-        height: 80,
-        justifyContent: "center",
-        alignItems: "center",
-        alignSelf: "stretch", 
-        borderWidth: 2,
-        borderColor: "#c3cfd9" 
-      }}>
-        <Text style={{ color: "#6558f5", fontSize: 30 }}> a Xavy Wars!</Text>
-      </View>
-
-      <View style={{ 
-        flex: 1,
-        width: "100%",
-        alignSelf: "stretch",
-        paddingBottom: 20
-      }} >
+    <View style={style.content}>
+      <Header title={film.title} />
+      <View style={style.contentPrincipal}>
         <ScrollView>
-          {data.allFilms.map((film, key) => (
-             <View key={key} style={{
-                minHeight: 120,
-                borderWidth: 2,
-                borderColor: "#c3cfd9",
-                marginTop: 20,
-                marginLeft: 20,
-                marginRight: 20,
-                padding: 10
-              }}>
+          <View style={styleHome.target}>
+            <Text style={style.textProperty}>
+              Director:
+              <Text style={style.textDetail}> {film.director}</Text>
+            </Text>
+            <Text style={style.textProperty}>
+              Release Date:
+              <Text style={style.textDetail}>
+                {moment(film.releaseDate).format("LL")}
+              </Text>
+            </Text>
+            <Text style={style.textProperty}>
+              ISrelfjf:
+              <Text style={style.textDetail}> ALGO</Text>
+            </Text>
+            <Text style={style.title}>Especies</Text>
+            <View style={styleHome.producers}>
+              {film.species.map((specie, key) => (
                 <View
-                  style={{
-                    flexDirection: "row",
-                  }}
-                >
-                  <Text style={{ fontSize: 15, fontWeight: "bold" }}>{film.title.toUpperCase()}</Text>
-                  <Text style={{ color: "#788896", fontSize: 15, right: 0, position: "absolute" }}>{moment(film.createdAt).format('LL')}</Text>
-                </View>
-                <Text style={{ color: "#788896", fontSize: 15, top: 5 }}>{film.director}</Text>
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: "row",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  {film.producers.map((producer, key) => (
-                    <View key={key} style={{ 
-                      borderWidth: 2,
+                  key={key}
+                  style={[
+                    styleHome.target,
+                    {
+                      minWidth: "90%",
+                      borderRadius: 10,
                       borderColor: "#6558f5",
-                      alignSelf: "stretch",
-                      marginTop: 10,
-                      marginRight: 10,
-                      padding: 3,
-                      height: 28,
-                      borderRadius: 50,
-                      backgroundColor: "#c7c3fa"
-                    }}>
-                      <Text style={{ color: "#6e61f6", fontSize: 15 }}>{producer}</Text>
-                    </View>
-                  ))}
+                      fontSize: 16,
+                    }
+                  ]}>
+                  <Text>Name: {specie.name}</Text>
+                  <Text>Classification: {specie.classification}</Text>
+                  <Text>Language: {specie.language}</Text>
+                  <Text>Designation: {specie.designation}</Text>
+                  <Text>Hair Color: {specie.hairColor}</Text>
+                  <Text>Eye Color: {specie.eyeColor}</Text>
+                  <Text>Average Height: {specie.averageHeight}</Text>
+                  <Text>Average Lifespan: {specie.averageLifespan}</Text>
                 </View>
-                <Text style={{ color: "#67c9bf", fontSize: 15, right: 0, position: "absolute", bottom: 0 }}>Ver más ></Text>
-              </View>
-          ))}
+              ))}
+            </View>
+          </View>
         </ScrollView>
       </View>
     </View>
