@@ -43,7 +43,8 @@ export default function SpecieTarget({ film }) {
           <View style={style.featureSpecie}>
             <Text style={style.textPropertySpecies}>Average Lifespan</Text>
             <Text style={style.textDetailSpecies}>
-              {specie.averageLifespan} years
+              {specie.averageLifespan ? `${specie.averageLifespan} years` 
+              : "n/a"}
             </Text>
           </View>
         </View>
