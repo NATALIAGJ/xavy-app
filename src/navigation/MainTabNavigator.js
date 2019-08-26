@@ -32,7 +32,7 @@ export default createAppContainer(
         }
       }),
       tabBarOptions: {
-        activeTintColor: "tomato",
+        activeTintColor: "#6558f5",
         inactiveTintColor: "gray"
       }
     }

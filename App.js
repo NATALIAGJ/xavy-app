@@ -25,8 +25,6 @@ const client = new ApolloClient({
   link
 })
 
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

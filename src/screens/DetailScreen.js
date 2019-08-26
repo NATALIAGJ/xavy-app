@@ -3,7 +3,7 @@ import gql from "graphql-tag"
 import { useQuery } from "@apollo/react-hooks"
 import moment from "moment"
 import { Text, View, ScrollView } from "react-native"
-import { Header } from "../components/index"
+import { Loader, Error, Species } from "../components/index"
 import style from "../styles/UiStyle"
 import styleHome from "../styles/HomeScreenStyle"
 
@@ -19,10 +19,8 @@ const FILM_QUERY = gql`
         classification
         language
         designation
-        hairColor
-        eyeColor
-        averageHeight
         averageLifespan
+        skinColor
       }
     }
   }
@@ -34,14 +32,16 @@ export default function HomeScreen(props) {
     variables: { id }
   })
   const film = data.Film
-  if (loading) return <Text>Loading...</Text>
-  if (error) return <Text>Error!!</Text>
+  if (loading) return <Loader />
+  if (error) return <Error />
   return (
     <View style={style.content}>
-      <Header title={film.title} />
+      <View style={style.headerDetail}>
+        <Text style={style.letterTitle}>{film.title}</Text>
+      </View>
       <View style={style.contentPrincipal}>
-        <ScrollView>
-          <View style={styleHome.target}>
+        <View style={[styleHome.targetDetail]}>
+          <View style={{ left: 20 }}>
             <Text style={style.textProperty}>
               Director:
               <Text style={style.textDetail}> {film.director}</Text>
@@ -53,35 +53,14 @@ export default function HomeScreen(props) {
               </Text>
             </Text>
             <Text style={style.textProperty}>
-              ISrelfjf:
-              <Text style={style.textDetail}> ALGO</Text>
+              Is Released:
+              <Text style={style.textDetail}> true</Text>
             </Text>
-            <Text style={style.title}>Especies</Text>
-            <View style={styleHome.producers}>
-              {film.species.map((specie, key) => (
-                <View
-                  key={key}
-                  style={[
-                    styleHome.target,
-                    {
-                      minWidth: "90%",
-                      borderRadius: 10,
-                      borderColor: "#6558f5",
-                      fontSize: 16,
-                    }
-                  ]}>
-                  <Text>Name: {specie.name}</Text>
-                  <Text>Classification: {specie.classification}</Text>
-                  <Text>Language: {specie.language}</Text>
-                  <Text>Designation: {specie.designation}</Text>
-                  <Text>Hair Color: {specie.hairColor}</Text>
-                  <Text>Eye Color: {specie.eyeColor}</Text>
-                  <Text>Average Height: {specie.averageHeight}</Text>
-                  <Text>Average Lifespan: {specie.averageLifespan}</Text>
-                </View>
-              ))}
-            </View>
           </View>
+        </View>
+        <Text style={[style.textProperty, style.textSpecies]}>SPECIES</Text>
+        <ScrollView>
+          <Species film={film} />
         </ScrollView>
       </View>
     </View>

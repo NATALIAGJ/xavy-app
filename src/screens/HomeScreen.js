@@ -3,7 +3,7 @@ import gql from "graphql-tag"
 import moment from "moment"
 import { useQuery } from "@apollo/react-hooks"
 import { Text, View, ScrollView, TouchableOpacity } from "react-native"
-import { Header } from "../components/index"
+import { Header, Loader, Error } from "../components/index"
 import style from "../styles/UiStyle"
 import styleHome from "../styles/HomeScreenStyle"
 
@@ -21,11 +21,11 @@ const ALL_FILMS_QUERY = gql`
 
 export default function HomeScreen(props) {
   const { loading, error, data } = useQuery(ALL_FILMS_QUERY)
-  if (loading) return <Text>Loading...</Text>
-  if (error) return <Text>Error!!</Text>
+  if (loading) return <Loader />
+  if (error) return <Error />
   return (
     <View style={style.content}>
-      <Header title={"Bienvenido a Xavy Wars!"} />
+      <Header />
       <View style={style.contentPrincipal}>
         <ScrollView>
           {data.allFilms.map((film, key) => (
