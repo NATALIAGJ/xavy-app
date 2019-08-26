@@ -13,6 +13,7 @@ const FILM_QUERY = gql`
       id
       title
       releaseDate
+      isPublished
       director
       species {
         name
@@ -53,8 +54,10 @@ export default function HomeScreen(props) {
               </Text>
             </Text>
             <Text style={styleDetail.textProperty}>
-              Is Released:
-              <Text style={styleDetail.textDetail}> true</Text>
+              Is Published:
+              <Text style={styleDetail.textDetail}>
+                {film.isPublished ? ` Yes` :  ` No`}
+              </Text>
             </Text>
           </View>
         </View>
