@@ -1,13 +1,12 @@
 import React from "react"
 import { Text, View } from "react-native"
-import style from "../styles/UiStyle"
-import styleHome from "../styles/HomeScreenStyle"
+import style from "../styles/SpeciesStyle"
 
 export default function SpecieTarget({ film }) {
   return (
-    <View style={styleHome.species}>
+    <View style={style.species}>
       {film.species.map((specie, key) => (
-        <View key={key} style={styleHome.targetSpecies}>
+        <View key={key} style={style.targetSpecies}>
           <Text style={[style.textPropertySpecies, { fontSize: 25 }]}>
             {specie.name}
           </Text>
@@ -16,7 +15,7 @@ export default function SpecieTarget({ film }) {
           </Text>
           <View
             style={[
-              styleHome.featureSpecie,
+              style.featureSpecie,
               {
                 backgroundColor: "#c7c3fa"
               }
@@ -24,28 +23,27 @@ export default function SpecieTarget({ film }) {
             <Text style={style.textPropertySpecies}>Language</Text>
             <Text style={style.textDetailSpecies}> {specie.language} </Text>
           </View>
-          <View style={styleHome.featureSpecie}>
+          <View style={style.featureSpecie}>
             <Text style={style.textPropertySpecies}>Designation</Text>
             <Text style={style.textDetailSpecies}> {specie.designation} </Text>
           </View>
-          <View style={[styleHome.featureSpecie, { backgroundColor: "#c7c3fa" }]}>
+          <View style={[style.featureSpecie, { backgroundColor: "#c7c3fa" }]}>
             <Text style={style.textPropertySpecies}>Skin Color</Text>
             {specie.skinColor !== null ? 
               specie.skinColor.map((skinColor, key) => (
                 <Text key={key} style={style.textDetailSpecies}>
-                   {skinColor} - 
+                  {skinColor} -
                 </Text>
               )) : (
                 <Text key={key} style={style.textDetailSpecies}>
-                    n/a
-                </Text>
-              )
+                  n/a
+                </Text>)
             }
           </View>
-          <View style={styleHome.featureSpecie}>
+          <View style={style.featureSpecie}>
             <Text style={style.textPropertySpecies}>Average Lifespan</Text>
             <Text style={style.textDetailSpecies}>
-               {specie.averageLifespan} years
+              {specie.averageLifespan} years
             </Text>
           </View>
         </View>

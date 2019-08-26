@@ -5,7 +5,7 @@ import moment from "moment"
 import { Text, View, ScrollView } from "react-native"
 import { Loader, Error, Species } from "../components/index"
 import style from "../styles/UiStyle"
-import styleHome from "../styles/HomeScreenStyle"
+import styleDetail from "../styles/DetailScreenStyle"
 
 const FILM_QUERY = gql`
   query getFilm($id: ID!) {
@@ -36,29 +36,31 @@ export default function HomeScreen(props) {
   if (error) return <Error />
   return (
     <View style={style.content}>
-      <View style={style.headerDetail}>
-        <Text style={style.letterTitle}>{film.title}</Text>
+      <View style={styleDetail.headerDetail}>
+        <Text style={styleDetail.letterTitle}>{film.title}</Text>
       </View>
       <View style={style.contentPrincipal}>
-        <View style={[styleHome.targetDetail]}>
+        <View style={[styleDetail.targetDetail]}>
           <View style={{ left: 20 }}>
-            <Text style={style.textProperty}>
+            <Text style={styleDetail.textProperty}>
               Director:
-              <Text style={style.textDetail}> {film.director}</Text>
+              <Text style={styleDetail.textDetail}> {film.director}</Text>
             </Text>
-            <Text style={style.textProperty}>
+            <Text style={styleDetail.textProperty}>
               Release Date:
-              <Text style={style.textDetail}>
+              <Text style={styleDetail.textDetail}>
                 {moment(film.releaseDate).format("LL")}
               </Text>
             </Text>
-            <Text style={style.textProperty}>
+            <Text style={styleDetail.textProperty}>
               Is Released:
-              <Text style={style.textDetail}> true</Text>
+              <Text style={styleDetail.textDetail}> true</Text>
             </Text>
           </View>
         </View>
-        <Text style={[style.textProperty, style.textSpecies]}>SPECIES</Text>
+        <Text style={[styleDetail.textProperty, styleDetail.textSpecies]}>
+          SPECIES
+        </Text>
         <ScrollView>
           <Species film={film} />
         </ScrollView>

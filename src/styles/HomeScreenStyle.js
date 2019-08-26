@@ -10,36 +10,6 @@ export default StyleSheet.create({
     marginRight: 20,
     padding: 10
   },
-  targetDetail: {
-    backgroundColor: "#F8F8F8",
-    padding: 10,
-    minHeight: 93
-  },
-  targetSpecies: {
-    minHeight: 150,
-    borderWidth: 2,
-    borderColor: "#c3cfd9",
-    marginTop: 10,
-    marginLeft: 20,
-    marginRight: 20,
-    padding: 10,
-    minWidth: "90%"
-  },
-  targetFilm: {
-    minHeight: 80,
-    borderWidth: 2,
-    borderColor: "#c3cfd9",
-    marginTop: 20,
-    marginLeft: 20,
-    marginRight: 20,
-    padding: 10
-  },
-  featureSpecie: {
-    flexDirection: "row",
-    height: 38,
-    alignItems: "center",
-    flexWrap: "wrap"
-  },
   letterTarget: {
     color: "#788896",
     fontSize: 15
